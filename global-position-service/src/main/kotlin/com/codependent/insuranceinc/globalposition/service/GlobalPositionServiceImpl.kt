@@ -18,13 +18,13 @@ class GlobalPositionServiceImpl(private val config: GlobalPositionConfigurationP
 
         val customerMono: Mono<CustomerProfile> = webClient.get().uri("${config.customerUrl}/profiles/${userId}")
                 .retrieve().bodyToMono(CustomerProfile::class.java)
-                .onErrorReturn(CustomerProfile("-1", "", null))
+                .onErrorReturn(CustomerProfile("-1", "", null)).log()
         val carPoliciesMono: Mono<List<CarPolicy>> = webClient.get().uri("${config.carUrl}/policies/${userId}")
                 .retrieve().bodyToFlux(CarPolicy::class.java).collectList()
-                .onErrorReturn(emptyList())
+                .onErrorReturn(emptyList()).log()
         val homePoliciesMono: Mono<List<HomePolicy>> = webClient.get().uri("${config.homeUrl}/policies/${userId}")
                 .retrieve().bodyToFlux(HomePolicy::class.java).collectList()
-                .onErrorReturn(emptyList())
+                .onErrorReturn(emptyList()).log()
 
         return Mono.zip(customerMono, carPoliciesMono, homePoliciesMono).map { GlobalPosition(it.t1, it.t2, it.t3) }
     }
