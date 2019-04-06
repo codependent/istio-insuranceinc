@@ -3,3 +3,8 @@ carUrl: http://car-policy-service
 homeUrl: http://home-policy-service
 
 customerUrl: http://customer-service-v1
+
+
+logging:
+  level:
+    org.springframework.web: debug
