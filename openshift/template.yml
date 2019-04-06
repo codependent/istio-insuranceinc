@@ -153,11 +153,11 @@ parameters:
   description: "Path to Dockerfile on Git repository"
   value: './'
   required: true
-  - name: "MIN_MEM"
-    description: "Memoria minima para el pod"
-    value: "400m"
-    required: false
-  - name: "MAX_MEM"
-    description: "Memoria maxima para el pod"
-    value: "600m"
-    required: false
+- name: "MIN_MEM"
+  description: "Memoria minima para el pod"
+  value: "400m"
+  required: false
+- name: "MAX_MEM"
+  description: "Memoria maxima para el pod"
+  value: "600m"
+  required: false
