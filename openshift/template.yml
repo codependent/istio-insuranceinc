@@ -1,0 +1,157 @@
+kind: "Template"
+apiVersion: "v1"
+labels:
+  template: springbootembedded-build
+  version: 1.0.0
+metadata:
+  name: "springbootembedded-build"
+  annotations:
+    description: "Template para proyectos Spring Boot con servidor embebido"
+    tags: "netty,spring,boot,cloud,java"
+    iconClass: "icon-tomcat"
+objects:
+  - kind: "ImageStream"
+    apiVersion: "v1"
+    metadata:
+      name: "${APPLICATION_NAME}"
+      creationTimestamp: null
+      labels:
+        app: "${APPLICATION_NAME}"
+    spec:
+      tags:
+        - name: "latest"
+  - kind: "BuildConfig"
+    apiVersion: "v1"
+    metadata:
+      name: "${APPLICATION_NAME}"
+      creationTimestamp:
+      labels:
+        app: "${APPLICATION_NAME}"
+    spec:
+      source:
+        type: "Git"
+        git:
+          uri: "${REPOSITORY_URL}"
+        contextDir: "${REPOSITORY_PATH}"
+        sourceSecret:
+          name: "${GITLAB_SECRET}"
+      strategy:
+        type: Docker
+        dockerStrategy:
+          forcePull: true
+          noCache: true
+          env:
+            - name: "MIN_MEM"
+              value: "${MIN_MEM}"
+            - name: "MAX_MEM"
+              value: "${MAX_MEM}"
+      output:
+        to:
+          kind: "ImageStreamTag"
+          name: "${APPLICATION_NAME}:latest"
+      resources: {}
+    status:
+      lastVersion: 0
+  - kind: "DeploymentConfig"
+    apiVersion: "v1"
+    metadata:
+      name: "${APPLICATION_NAME}"
+      creationTimestamp:
+      labels:
+        app: "${APPLICATION_NAME}"
+    spec:
+      strategy:
+        type: "Rolling"
+        rollingParams:
+          updatePeriodSeconds: 1
+          intervalSeconds: 1
+          timeoutSeconds: 180
+          maxUnavailable: "25%"
+          maxSurge: "25%"
+        resources: {}
+      triggers:
+        - type: "ImageChange"
+          imageChangeParams:
+            automatic: true
+            containerNames:
+              - "${APPLICATION_NAME}"
+            from:
+              kind: "ImageStreamTag"
+              name: "${APPLICATION_NAME}:latest"
+      replicas: 1
+      selector:
+        app: "${APPLICATION_NAME}"
+        deploymentconfig: "${APPLICATION_NAME}"
+      template:
+        metadata:
+          name: "${APPLICATION_NAME}"
+          creationTimestamp:
+          labels:
+            app: "${APPLICATION_NAME}"
+            deploymentconfig: "${APPLICATION_NAME}"
+        spec:
+          containers:
+            - name: "${APPLICATION_NAME}"
+              image: "${APPLICATION_NAME}:latest"
+              ports:
+                - name: "jolokia"
+                  containerPort: 8778
+                  protocol: TCP
+                - name: http
+                  containerPort: 8080
+                  protocol: TCP
+              resources: {}
+              imagePullPolicy: "Always"
+              readinessProbe:
+                httpGet:
+                  path: "/actuator/info"
+                  port: 8080
+                  scheme: HTTP
+                initialDelaySeconds: 60
+                timeoutSeconds: 2
+                periodSeconds: 30
+                successThreshold: 1
+                failureThreshold: 5
+              livenessProbe:
+                httpGet:
+                  path: "/actuator/health"
+                  port: 8080
+                  scheme: HTTP
+                initialDelaySeconds: 90
+                timeoutSeconds: 2
+                periodSeconds: 30
+                successThreshold: 1
+                failureThreshold: 5
+          restartPolicy: "Always"
+          terminationGracePeriodSeconds: 30
+          dnsPolicy: "ClusterFirst"
+          securityContext: {}
+    status: {}
+  - kind: "Service"
+    apiVersion: "v1"
+    metadata:
+      name: "${APPLICATION_NAME}"
+      creationTimestamp:
+      labels:
+        app: "${APPLICATION_NAME}"
+    spec:
+      ports:
+        - name: "8080-tcp"
+          protocol: "TCP"
+          port: 8080
+          targetPort: 8080
+      selector:
+        deploymentconfig: "${APPLICATION_NAME}"
+parameters:
+  - name: "APPLICATION_NAME"
+    description: "Name of the application"
+    value: "xxx-yyy"
+    required: true
+  - name: "MIN_MEM"
+    description: "Memoria minima para el pod"
+    value: "400m"
+    required: false
+  - name: "MAX_MEM"
+    description: "Memoria maxima para el pod"
+    value: "600m"
+    required: false
