@@ -145,6 +145,14 @@ parameters:
     description: "Name of the application"
     value: "xxx-yyy"
     required: true
+- name: "REPOSITORY_URL"
+  description: "The Git URL of the repository"
+  value: ""
+  required: true
+- name: "REPOSITORY_PATH"
+  description: "Path to Dockerfile on Git repository"
+  value: './'
+  required: true
   - name: "MIN_MEM"
     description: "Memoria minima para el pod"
     value: "400m"
