@@ -1,5 +1,5 @@
-carUrl: http://carpolicy-service
+carUrl: http://car-policy-service
 
-homeUrl: http://homepolicy-service
+homeUrl: http://home-policy-service
 
 customerUrl: http://customer-service
