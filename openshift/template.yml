@@ -33,8 +33,6 @@ objects:
         git:
           uri: "${REPOSITORY_URL}"
         contextDir: "${REPOSITORY_PATH}"
-        sourceSecret:
-          name: "${GITLAB_SECRET}"
       strategy:
         type: Docker
         dockerStrategy:
