@@ -1,0 +1,21 @@
+apiVersion: networking.istio.io/v1alpha3
+kind: VirtualService
+metadata:
+  name: insuranceinc
+  namespace: istio-insuranceinc
+spec:
+  hosts:
+  - "*"
+  gateways:
+  - insuranceinc-gateway
+  http:
+  - match:
+    - uri:
+        prefix: /insuranceinc
+    rewrite:
+      uri: " "
+    route:
+    - destination:
+        host: global-position-service
+        port:
+          number: 8080
