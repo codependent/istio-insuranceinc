@@ -1,3 +1,3 @@
-package com.codependent.insuranceinc.globalposition.dto
+package com.codependent.insuranceinc.customer.dto
 
 data class CustomerProfile(val id: String, val name: String, val rating: String?)
