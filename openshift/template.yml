@@ -101,20 +101,22 @@ objects:
               resources: {}
               imagePullPolicy: "Always"
               readinessProbe:
-                httpGet:
-                  path: "/actuator/info"
-                  port: 8080
-                  scheme: HTTP
-                initialDelaySeconds: 10
+                exec:
+                command:
+                  - wget
+                  - '-qO-'
+                  - 'http://localhost:8080/actuator/info'
+                initialDelaySeconds: 5
                 timeoutSeconds: 2
                 periodSeconds: 30
                 successThreshold: 1
-                failureThreshold: 5
+                failureThreshold: 10
               livenessProbe:
-                httpGet:
-                  path: "/actuator/health"
-                  port: 8080
-                  scheme: HTTP
+                exec:
+                command:
+                  - wget
+                  - '-qO-'
+                  - 'http://localhost:8080/actuator/health'
                 initialDelaySeconds: 20
                 timeoutSeconds: 2
                 periodSeconds: 30
@@ -134,7 +136,7 @@ objects:
         app: "${APPLICATION_NAME}"
     spec:
       ports:
-        - name: "8080-tcp"
+        - name: "tcp-8080"
           protocol: "TCP"
           port: 8080
           targetPort: 8080
