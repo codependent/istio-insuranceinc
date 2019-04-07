@@ -102,7 +102,7 @@ objects:
               imagePullPolicy: "Always"
               readinessProbe:
                 exec:
-                command:
+                  command:
                   - wget
                   - '-qO-'
                   - 'http://localhost:8080/actuator/info'
@@ -113,7 +113,7 @@ objects:
                 failureThreshold: 10
               livenessProbe:
                 exec:
-                command:
+                  command:
                   - wget
                   - '-qO-'
                   - 'http://localhost:8080/actuator/health'
