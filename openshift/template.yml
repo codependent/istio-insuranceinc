@@ -1,8 +1,8 @@
 kind: "Template"
 apiVersion: "v1"
 labels:
-  template: springbootembedded-build
-  version: 1.0.0
+  template-name: springbootembedded-build
+  template-version: 1.0.0
 metadata:
   name: "springbootembedded-build"
   annotations:
@@ -13,20 +13,22 @@ objects:
   - kind: "ImageStream"
     apiVersion: "v1"
     metadata:
-      name: "${APPLICATION_NAME}"
+      name: "${APPLICATION_NAME}-${APPLICATION_VERSION}"
       creationTimestamp: null
       labels:
         app: "${APPLICATION_NAME}"
+        version: ${APPLICATION_VERSION}
     spec:
       tags:
         - name: "latest"
   - kind: "BuildConfig"
     apiVersion: "v1"
     metadata:
-      name: "${APPLICATION_NAME}"
+      name: "${APPLICATION_NAME}-${APPLICATION_VERSION}"
       creationTimestamp:
       labels:
         app: "${APPLICATION_NAME}"
+        version: ${APPLICATION_VERSION}
     spec:
       source:
         type: "Git"
@@ -46,14 +48,14 @@ objects:
       output:
         to:
           kind: "ImageStreamTag"
-          name: "${APPLICATION_NAME}:latest"
+          name: "${APPLICATION_NAME}-${APPLICATION_VERSION}:latest"
       resources: {}
     status:
       lastVersion: 0
   - kind: "DeploymentConfig"
     apiVersion: "v1"
     metadata:
-      name: "${APPLICATION_NAME}"
+      name: "${APPLICATION_NAME}-${APPLICATION_VERSION}"
       creationTimestamp:
       labels:
         app: "${APPLICATION_NAME}"
@@ -76,22 +78,22 @@ objects:
               - "${APPLICATION_NAME}"
             from:
               kind: "ImageStreamTag"
-              name: "${APPLICATION_NAME}:latest"
+              name: "${APPLICATION_NAME}-${APPLICATION_VERSION}:latest"
       replicas: 1
       selector:
         app: "${APPLICATION_NAME}"
         version: ${APPLICATION_VERSION}
       template:
         metadata:
-          name: "${APPLICATION_NAME}"
+          name: "${APPLICATION_NAME}-${APPLICATION_VERSION}"
           creationTimestamp:
           labels:
             app: "${APPLICATION_NAME}"
             version: ${APPLICATION_VERSION}
         spec:
           containers:
-            - name: "${APPLICATION_NAME}"
-              image: "${APPLICATION_NAME}:latest"
+            - name: "${APPLICATION_NAME}-${APPLICATION_VERSION}"
+              image: "${APPLICATION_NAME}-${APPLICATION_VERSION}:latest"
               ports:
                 - name: "jolokia"
                   containerPort: 8778
@@ -135,6 +137,7 @@ objects:
       creationTimestamp:
       labels:
         app: "${APPLICATION_NAME}"
+        version: ${APPLICATION_VERSION}
     spec:
       ports:
         - name: "tcp-8080"
@@ -142,7 +145,8 @@ objects:
           port: 8080
           targetPort: 8080
       selector:
-        deploymentconfig: "${APPLICATION_NAME}"
+        app: "${APPLICATION_NAME}"
+        version: ${APPLICATION_VERSION}
 parameters:
 - name: "APPLICATION_NAME"
   description: "Name of the application"
