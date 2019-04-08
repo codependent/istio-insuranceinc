@@ -1,1 +1,5 @@
 customerRatingUrl: http://customer-rating-service:8080
+
+logging:
+  level:
+    org.springframework.web: debug
