@@ -23,7 +23,7 @@ class CustomerRatingsServiceImpl : CustomerRatingsService {
         return if(customerRating == null) {
             Mono.empty()
         }else {
-            Mono.just(customerRating).delayElement(Duration.ofSeconds(30L))
+            Mono.just(customerRating).delayElement(Duration.ofSeconds(5L))
         }
     }
 
