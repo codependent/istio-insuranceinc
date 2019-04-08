@@ -2,7 +2,7 @@ carUrl: http://car-policy-service:8080
 
 homeUrl: http://home-policy-service:8080
 
-customerUrl: http://customer-service-v1:8080
+customerUrl: http://customer-service:8080
 
 
 logging:
