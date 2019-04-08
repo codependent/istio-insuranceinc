@@ -2,10 +2,9 @@ package com.codependent.insuranceinc.customer.service
 
 import com.codependent.insuranceinc.customer.dto.CustomerProfile
 import com.codependent.insuranceinc.customerrating.dto.CustomerRating
-import com.codependent.insuranceinc.globalposition.configuration.CustomerProfileConfigurationProperties
+import com.codependent.insuranceinc.customer.configuration.CustomerProfileConfigurationProperties
 import org.springframework.stereotype.Service
 import org.springframework.web.reactive.function.client.WebClient
-import reactor.core.publisher.Flux
 import reactor.core.publisher.Mono
 import reactor.core.publisher.toFlux
 import reactor.core.publisher.toMono

@@ -9,7 +9,7 @@ import org.springframework.web.reactive.function.server.router
 class CustomerRoutes(private val customerHandler: CustomerHandler) {
 
     @Bean
-    fun homePolicyRouter() = router {
+    fun customerRouter() = router {
         "/profiles".nest {
             GET("/{userId}", customerHandler::getPolicies)
         }
