@@ -23,12 +23,12 @@ spec:
 apiVersion: networking.istio.io/v1alpha3
 kind: VirtualService
 metadata:
-  name: customer-policy-service
+  name: customer-service
 spec:
   hosts:
-  - customer-policy-service
+  - customer-service
   http:
   - route:
     - destination:
-        host: customer-policy-service
+        host: customer-service
         subset: v1

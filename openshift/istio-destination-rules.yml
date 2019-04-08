@@ -4,7 +4,7 @@ metadata:
   name: customer-service-destination-rule
   namespace: istio-insuranceinc
 spec:
-  host: customer--service
+  host: customer-service
   trafficPolicy:
     tls:
       mode: ISTIO_MUTUAL
