@@ -57,6 +57,7 @@ objects:
       creationTimestamp:
       labels:
         app: "${APPLICATION_NAME}"
+        version: ${APPLICATION_VERSION}
     spec:
       strategy:
         type: "Rolling"
@@ -79,14 +80,14 @@ objects:
       replicas: 1
       selector:
         app: "${APPLICATION_NAME}"
-        deploymentconfig: "${APPLICATION_NAME}"
+        version: ${APPLICATION_VERSION}
       template:
         metadata:
           name: "${APPLICATION_NAME}"
           creationTimestamp:
           labels:
             app: "${APPLICATION_NAME}"
-            deploymentconfig: "${APPLICATION_NAME}"
+            version: ${APPLICATION_VERSION}
         spec:
           containers:
             - name: "${APPLICATION_NAME}"
@@ -146,6 +147,10 @@ parameters:
 - name: "APPLICATION_NAME"
   description: "Name of the application"
   value: "xxx-yyy"
+  required: true
+- name: "APPLICATION_VERSION"
+  description: "Version of the application"
+  value: ""
   required: true
 - name: "REPOSITORY_URL"
   description: "The Git URL of the repository"
