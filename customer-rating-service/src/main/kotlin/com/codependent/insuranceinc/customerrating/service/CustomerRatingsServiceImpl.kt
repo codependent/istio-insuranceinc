@@ -7,6 +7,7 @@ import reactor.core.publisher.Flux
 import reactor.core.publisher.Mono
 import reactor.core.publisher.toFlux
 import reactor.core.publisher.toMono
+import java.time.Duration
 
 @Service
 class CustomerRatingsServiceImpl : CustomerRatingsService {
@@ -22,7 +23,7 @@ class CustomerRatingsServiceImpl : CustomerRatingsService {
         return if(customerRating == null) {
             Mono.empty()
         }else {
-            Mono.just(customerRating)
+            Mono.just(customerRating).delayElement(Duration.ofSeconds(5L))
         }
     }
 

@@ -140,7 +140,7 @@ objects:
         version: ${APPLICATION_VERSION}
     spec:
       ports:
-        - name: "tcp-8080"
+        - name: "http"
           protocol: "TCP"
           port: 8080
           targetPort: 8080
