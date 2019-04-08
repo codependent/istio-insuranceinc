@@ -75,7 +75,7 @@ objects:
           imageChangeParams:
             automatic: true
             containerNames:
-              - "${APPLICATION_NAME}"
+              - "${APPLICATION_NAME}-${APPLICATION_VERSION}"
             from:
               kind: "ImageStreamTag"
               name: "${APPLICATION_NAME}-${APPLICATION_VERSION}:latest"
