@@ -6,6 +6,7 @@ import com.codependent.insuranceinc.customer.configuration.CustomerProfileConfig
 import org.springframework.stereotype.Service
 import org.springframework.web.reactive.function.client.WebClient
 import reactor.core.publisher.Mono
+import reactor.core.publisher.onErrorReturn
 import reactor.core.publisher.toFlux
 import reactor.core.publisher.toMono
 
@@ -24,8 +25,9 @@ class CustomerServiceImpl(private val config: CustomerProfileConfigurationProper
 
         val customerRatingMono: Mono<CustomerRating> = webClient.get().uri("${config.customerRatingUrl}/customerRatings/${userId}")
                 .retrieve().bodyToMono(CustomerRating::class.java)
+                .onErrorReturn(CustomerRating(null))
         val customerProfileMono = customers.filter { it.id == userId }.toMono()
 
-        return Mono.zip(customerProfileMono, customerRatingMono) { cp, cr -> CustomerProfile(cp.id, cp.name, cr.rating.name)}
+        return Mono.zip(customerProfileMono, customerRatingMono) { cp, cr -> CustomerProfile(cp.id, cp.name, cr.rating?.name)}
     }
 }
