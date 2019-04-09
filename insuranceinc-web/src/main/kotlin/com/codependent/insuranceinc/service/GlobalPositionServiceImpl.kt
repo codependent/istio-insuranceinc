@@ -14,6 +14,7 @@ class GlobalPositionServiceImpl(private val config: InsuranceincConfigurationPro
 
         return webClient.get().uri("${config.globalPositionUrl}/globalPosition/${userId}")
                 .retrieve().bodyToMono(String::class.java)
+                .log()
                 .onErrorReturn("")
 
     }
