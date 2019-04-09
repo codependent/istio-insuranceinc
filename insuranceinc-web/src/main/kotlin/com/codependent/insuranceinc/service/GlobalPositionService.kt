@@ -4,6 +4,6 @@ import reactor.core.publisher.Mono
 
 interface GlobalPositionService {
 
-    fun getGlobalPosition(userId: String): Mono<String>
+    fun getGlobalPosition(userId: String): Mono<Map<*, *>>
 
 }

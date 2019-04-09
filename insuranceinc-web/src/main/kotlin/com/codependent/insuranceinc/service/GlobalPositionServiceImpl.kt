@@ -4,18 +4,19 @@ import com.codependent.insuranceinc.configuration.InsuranceincConfigurationPrope
 import org.springframework.stereotype.Service
 import org.springframework.web.reactive.function.client.WebClient
 import reactor.core.publisher.Mono
+import reactor.core.publisher.onErrorReturn
 
 @Service
 class GlobalPositionServiceImpl(private val config: InsuranceincConfigurationProperties) : GlobalPositionService {
 
     private val webClient = WebClient.builder().build()
 
-    override fun getGlobalPosition(userId: String): Mono<String> {
+    override fun getGlobalPosition(userId: String): Mono<Map<*, *>> {
 
         return webClient.get().uri("${config.globalPositionUrl}/globalPosition/${userId}")
-                .retrieve().bodyToMono(String::class.java)
+                .retrieve().bodyToMono(Map::class.java)
                 .log()
-                .onErrorReturn("")
+                .onErrorReturn(emptyMap<Any,Any>())
 
     }
 }
