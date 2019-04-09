@@ -1,26 +1,87 @@
-<!DOCTYPE html>
-
+<!doctype html>
 <html lang="en" xmlns:th="http://www.thymeleaf.org">
-
 <head>
-    <title>Insuranceinc Login</title>
-    <meta http-equiv="Content-Type" content="text/html; charset=UTF-8" />
+    <!-- Required meta tags -->
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+
+    <!-- Bootstrap CSS -->
+    <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/css/bootstrap.min.css"
+          integrity="sha384-ggOyR0iXCbMQv3Xipma34MD+dH/1fQ784/j6cY/iJTQUOhcWr7x9JvoRxT2MZw1T" crossorigin="anonymous">
+    <link th:href="@{/css/signin.css}" rel="stylesheet" type="text/css"  />
+
+
+    <style>
+        .bd-placeholder-img {
+            font-size: 1.125rem;
+            text-anchor: middle;
+            -webkit-user-select: none;
+            -moz-user-select: none;
+            -ms-user-select: none;
+            user-select: none;
+        }
+
+        @media (min-width: 768px) {
+            .bd-placeholder-img-lg {
+                font-size: 3.5rem;
+            }
+        }
+    </style>
+
+    <title>Insurance Inc. - Login</title>
 </head>
+<body class="text-center">
 
-<body>
+<form class="form-signin" th:action="@{/login}" th:method="POST">
+    <img class="mb-4" th:src="@{/img/profile.png}" alt="" width="72" height="72">
+    <h1 class="h3 mb-3 font-weight-normal">Insurance Inc</h1>
+    <h2 class="h4 mb-3 font-weight-normal">Login</h2>
+    <label for="inputUserId" class="sr-only">User</label>
+    <input type="text" id="inputUserId" name="userId" class="form-control" placeholder="User Id" required autofocus>
+    <label for="inputPassword" class="sr-only">Password</label>
+    <input type="password" id="inputPassword" name="password" class="form-control" placeholder="Password" required>
+    <input class="btn btn-lg btn-primary btn-block" type="submit" value="Sign in"/>
+    <p class="mt-5 mb-3 text-muted">&copy; 2019</p>
+</form>
+
+<!--
+<div class="container">
+
     <h1>LOGIN</h1>
-
     <form th:action="@{/login}" th:method="POST">
-        <label>
-            UserId:
-            <input type="text" name="userId" value=""/>
-        </label>
-        <label>
-            Password:
-            <input type="password" name="password" value=""/>
-        </label>
-        <input type="submit" name="submit" value="Submit"/>
-    </form>
-</body>
 
+        <div class="row">
+            <div class="col">
+                <label>
+                    UserId:
+                    <input type="text" name="userId" value=""/>
+                </label>
+            </div>
+        </div>
+        <div class="row">
+            <div class="col">
+                <label>
+                    Password:
+                    <input type="password" name="password" value=""/>
+                </label>
+            </div>
+        </div>
+
+        <input class="btn btn-success" type="submit" name="submit" value="Submit"/>
+</div>
+</form>
+</div>
+-->
+<!-- Optional JavaScript -->
+<!-- jQuery first, then Popper.js, then Bootstrap JS -->
+<script src="https://code.jquery.com/jquery-3.3.1.slim.min.js"
+        integrity="sha384-q8i/X+965DzO0rT7abK41JStQIAqVgRVzpbzo5smXKp4YfRvH+8abtTE1Pi6jizo"
+        crossorigin="anonymous"></script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.14.7/umd/popper.min.js"
+        integrity="sha384-UO2eT0CpHqdSJQ6hJty5KVphtPhzWj9WO1clHTMGa3JDZwrnQq4sF86dIHNDz0W1"
+        crossorigin="anonymous"></script>
+<script src="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/js/bootstrap.min.js"
+        integrity="sha384-JjSmVgyd0p3pXB1rRibZUAYoIIy6OrQ6VrjIEaFf/nJGzIxFDsf4x0xIM+B07jRM"
+        crossorigin="anonymous"></script>
+</body>
 </html>
