@@ -1,0 +1,26 @@
+<!DOCTYPE html>
+
+<html lang="en" xmlns:th="http://www.thymeleaf.org">
+
+<head>
+    <title>Insuranceinc Login</title>
+    <meta http-equiv="Content-Type" content="text/html; charset=UTF-8" />
+</head>
+
+<body>
+    <h1>LOGIN</h1>
+
+    <form th:action="@{/login}" th:method="POST">
+        <label>
+            UserId:
+            <input type="text" name="userId" value=""/>
+        </label>
+        <label>
+            Password:
+            <input type="password" name="password" value=""/>
+        </label>
+        <input type="submit" name="submit" value="Submit"/>
+    </form>
+</body>
+
+</html>
