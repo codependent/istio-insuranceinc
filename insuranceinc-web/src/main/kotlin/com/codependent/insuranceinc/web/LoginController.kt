@@ -7,7 +7,6 @@ import org.springframework.web.bind.annotation.ModelAttribute
 import org.springframework.web.bind.annotation.PostMapping
 import org.springframework.web.server.ServerWebExchange
 import reactor.core.publisher.Mono
-import reactor.core.publisher.toMono
 
 @Controller
 class LoginController {
@@ -18,9 +17,9 @@ class LoginController {
 
     @PostMapping("/login")
     fun doLogin(@ModelAttribute credentials: Credentials, swe: ServerWebExchange): Mono<String> {
-        return swe.session.flatMap {
+        return swe.session.map {
             it.attributes["userId"] = credentials.userId
-            "redirect:/globalPosition".toMono()
+            "redirect:/globalPosition"
         }
     }
 
