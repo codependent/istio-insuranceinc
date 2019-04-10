@@ -13,6 +13,7 @@ class OpenTracingExchangeFilterFunction(private val openTracingHeadersHolder: Op
     private val logger = LoggerFactory.getLogger(javaClass)
 
     override fun filter(request: ClientRequest, next: ExchangeFunction): Mono<ClientResponse> {
+        logger.debug("OpenTracingExchangeFilterFunction - filter()")
         val filtered = ClientRequest.from(request).headers { httpHeaders ->
             openTracingHeadersHolder.requestOpenTracingHeaders.get()?.forEach {
                 logger.debug("OpenTracingExchangeFilterFunction adding header key {} - value {}", it.key, it.value)
