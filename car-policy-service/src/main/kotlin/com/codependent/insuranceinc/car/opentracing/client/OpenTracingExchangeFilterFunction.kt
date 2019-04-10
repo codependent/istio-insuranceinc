@@ -1,6 +1,6 @@
 package com.codependent.insuranceinc.car.opentracing.client
 
-import com.codependent.insuranceinc.globalposition.opentracing.OpenTracingHeadersHolder
+import com.codependent.insuranceinc.car.opentracing.OpenTracingHeadersHolder
 import org.slf4j.LoggerFactory
 import org.springframework.web.reactive.function.client.ClientRequest
 import org.springframework.web.reactive.function.client.ClientResponse

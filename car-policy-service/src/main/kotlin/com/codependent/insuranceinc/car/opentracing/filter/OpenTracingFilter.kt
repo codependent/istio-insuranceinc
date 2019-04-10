@@ -1,6 +1,6 @@
 package com.codependent.insuranceinc.car.opentracing.filter
 
-import com.codependent.insuranceinc.globalposition.opentracing.OpenTracingHeadersHolder
+import com.codependent.insuranceinc.car.opentracing.OpenTracingHeadersHolder
 import org.slf4j.LoggerFactory
 import org.springframework.web.server.ServerWebExchange
 import org.springframework.web.server.WebFilter
