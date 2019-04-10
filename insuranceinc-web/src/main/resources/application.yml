@@ -1,1 +1,5 @@
 globalPositionUrl: http://global-position-service:8080
+
+logging:
+  level:
+    com.codependent: debug
