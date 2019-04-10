@@ -1,4 +1,4 @@
-package com.codependent.insuranceinc.car.configuration
+package com.codependent.insuranceinc.configuration
 
 import com.codependent.insuranceinc.opentracing.OpenTracingHeadersHolder
 import com.codependent.insuranceinc.opentracing.client.OpenTracingExchangeFilterFunction
