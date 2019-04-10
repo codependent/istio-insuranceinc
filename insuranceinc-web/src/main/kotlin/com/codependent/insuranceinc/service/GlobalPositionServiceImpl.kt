@@ -7,9 +7,8 @@ import reactor.core.publisher.Mono
 import reactor.core.publisher.onErrorReturn
 
 @Service
-class GlobalPositionServiceImpl(private val config: InsuranceincConfigurationProperties) : GlobalPositionService {
-
-    private val webClient = WebClient.builder().build()
+class GlobalPositionServiceImpl(private val config: InsuranceincConfigurationProperties,
+                                private val webClient: WebClient) : GlobalPositionService {
 
     override fun getGlobalPosition(userId: String): Mono<Map<*, *>> {
 
