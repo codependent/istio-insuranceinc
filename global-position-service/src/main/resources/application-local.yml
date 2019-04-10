@@ -1,3 +1,6 @@
+server:
+  port: 8080
+
 carUrl: http://localhost:8081
 
 homeUrl: http://localhost:8082

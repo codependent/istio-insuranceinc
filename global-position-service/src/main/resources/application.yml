@@ -4,7 +4,7 @@ homeUrl: http://home-policy-service:8080
 
 customerUrl: http://customer-service:8080
 
-
 logging:
   level:
+    com.codependent: debug
     org.springframework.web: debug

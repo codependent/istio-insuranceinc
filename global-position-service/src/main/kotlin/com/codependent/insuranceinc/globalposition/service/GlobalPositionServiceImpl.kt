@@ -10,9 +10,7 @@ import org.springframework.web.reactive.function.client.WebClient
 import reactor.core.publisher.Mono
 
 @Service
-class GlobalPositionServiceImpl(private val config: GlobalPositionConfigurationProperties) : GlobalPositionService {
-
-    private val webClient = WebClient.builder().build()
+class GlobalPositionServiceImpl(private val config: GlobalPositionConfigurationProperties, private val webClient: WebClient) : GlobalPositionService {
 
     override fun getGlobalPosition(userId: String): Mono<GlobalPosition> {
 
