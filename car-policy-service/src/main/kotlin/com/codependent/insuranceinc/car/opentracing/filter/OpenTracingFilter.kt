@@ -6,16 +6,7 @@ import org.springframework.web.server.WebFilter
 import org.springframework.web.server.WebFilterChain
 import reactor.core.publisher.Mono
 
-class OpenTracingFilter : WebFilter {
-
-    private val openTracingHeaders = setOf(
-            "x-request-id",
-            "x-b3-traceid",
-            "x-b3-spanid",
-            "x-b3-parentspanid",
-            "x-b3-sampled",
-            "x-b3-flags",
-            "x-ot-span-context")
+class OpenTracingFilter(private val openTracingHeaders: Set<String>) : WebFilter {
 
     private val logger = LoggerFactory.getLogger(javaClass)
 

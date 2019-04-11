@@ -8,7 +8,7 @@ import org.springframework.web.reactive.function.client.WebClient
 import org.springframework.web.server.WebFilter
 
 @Configuration
-class OpenTracingConfiguration {
+class OpenTracingConfiguration(private val openTracingConfigurationProperties: OpenTracingConfigurationProperties) {
 
     @Bean
     fun webClient(): WebClient {
@@ -17,11 +17,11 @@ class OpenTracingConfiguration {
 
     @Bean
     fun openTracingFilter(): WebFilter {
-        return OpenTracingFilter()
+        return OpenTracingFilter(openTracingConfigurationProperties.headers)
     }
 
     @Bean
     fun openTracingExchangeFilterFunction(): OpenTracingExchangeFilterFunction {
-        return OpenTracingExchangeFilterFunction()
+        return OpenTracingExchangeFilterFunction(openTracingConfigurationProperties.headers)
     }
 }
