@@ -19,8 +19,10 @@ class OpenTracingClientResponseMono(private val request: ClientRequest,
         val requestBuilder = ClientRequest.from(request)
         requestBuilder.headers { httpHeaders ->
             headersToPropagate.forEach {
-                logger.debug("Propagating header key {} - value{}", it, context.get<String>(it))
-                httpHeaders[it] = context.get<String>(it)
+                if(context.hasKey(it)) {
+                    logger.debug("Propagating header key {} - value{}", it, context.get<String>(it))
+                    httpHeaders[it] = context.get<String>(it)
+                }
             }
         }
         val mutatedRequest = requestBuilder.build()
