@@ -12,4 +12,4 @@ opentracing:
 
 logging:
   level:
-    org.springframework.web: debug
+    com.codependent: debug
