@@ -7,3 +7,8 @@ opentracing:
     - x-b3-sampled
     - x-b3-flags
     - x-ot-span-context
+
+
+logging:
+  level:
+    com.codependent: debug
