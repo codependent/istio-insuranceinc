@@ -11,9 +11,8 @@ import reactor.core.publisher.toFlux
 import reactor.core.publisher.toMono
 
 @Service
-class CustomerServiceImpl(private val config: CustomerProfileConfigurationProperties) : CustomerService {
-
-    private val webClient = WebClient.builder().build()
+class CustomerServiceImpl(private val config: CustomerProfileConfigurationProperties,
+                          private val webClient: WebClient) : CustomerService {
 
     private val customers = listOf(
             CustomerProfile("1", "Joe Smith", null),
