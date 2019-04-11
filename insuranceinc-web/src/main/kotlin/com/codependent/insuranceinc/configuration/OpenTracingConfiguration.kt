@@ -1,6 +1,5 @@
 package com.codependent.insuranceinc.configuration
 
-import com.codependent.insuranceinc.opentracing.OpenTracingHeadersHolder
 import com.codependent.insuranceinc.opentracing.client.OpenTracingExchangeFilterFunction
 import com.codependent.insuranceinc.opentracing.filter.OpenTracingFilter
 import org.springframework.context.annotation.Bean
@@ -17,17 +16,12 @@ class OpenTracingConfiguration {
     }
 
     @Bean
-    fun openTracingHeadersHolder(): OpenTracingHeadersHolder {
-        return OpenTracingHeadersHolder()
-    }
-
-    @Bean
     fun openTracingFilter(): WebFilter {
-        return OpenTracingFilter(openTracingHeadersHolder())
+        return OpenTracingFilter()
     }
 
     @Bean
     fun openTracingExchangeFilterFunction(): OpenTracingExchangeFilterFunction {
-        return OpenTracingExchangeFilterFunction(openTracingHeadersHolder())
+        return OpenTracingExchangeFilterFunction()
     }
 }

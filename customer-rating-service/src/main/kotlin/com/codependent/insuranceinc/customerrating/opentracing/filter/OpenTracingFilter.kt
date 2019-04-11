@@ -1,4 +1,4 @@
-package com.codependent.insuranceinc.globalposition.opentracing.filter
+package com.codependent.insuranceinc.customerrating.opentracing.filter
 
 import org.slf4j.LoggerFactory
 import org.springframework.web.server.ServerWebExchange

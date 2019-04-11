@@ -1,4 +1,4 @@
-package com.codependent.insuranceinc.globalposition.opentracing.client
+package com.codependent.insuranceinc.customer.opentracing.client
 
 import org.slf4j.LoggerFactory
 import org.springframework.web.reactive.function.client.ClientRequest

@@ -1,7 +1,7 @@
-package com.codependent.insuranceinc.car.configuration
+package com.codependent.insuranceinc.home.configuration
 
-import com.codependent.insuranceinc.car.opentracing.client.OpenTracingExchangeFilterFunction
-import com.codependent.insuranceinc.car.opentracing.filter.OpenTracingFilter
+import com.codependent.insuranceinc.home.opentracing.client.OpenTracingExchangeFilterFunction
+import com.codependent.insuranceinc.home.opentracing.filter.OpenTracingFilter
 import org.springframework.context.annotation.Bean
 import org.springframework.context.annotation.Configuration
 import org.springframework.web.reactive.function.client.WebClient
