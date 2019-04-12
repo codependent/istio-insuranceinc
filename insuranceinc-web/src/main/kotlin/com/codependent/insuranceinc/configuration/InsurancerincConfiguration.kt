@@ -6,10 +6,10 @@ import org.springframework.web.server.adapter.ForwardedHeaderTransformer
 
 @Configuration
 class InsurancerincConfiguration {
-
+/*
     @Bean
     fun forwardedHeaderTransformer() : ForwardedHeaderTransformer {
         return ForwardedHeaderTransformer()
     }
-
+*/
 }
