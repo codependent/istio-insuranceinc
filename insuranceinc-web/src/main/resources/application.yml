@@ -1,3 +1,6 @@
+server:
+  use-forward-headers: true
+
 globalPositionUrl: http://global-position-service:8080
 
 opentracing:

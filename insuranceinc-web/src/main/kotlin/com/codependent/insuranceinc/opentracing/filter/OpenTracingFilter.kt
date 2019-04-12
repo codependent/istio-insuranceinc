@@ -16,6 +16,7 @@ class OpenTracingFilter(private val openTracingHeaders: Set<String>) : WebFilter
                 .subscriberContext { ctx ->
                     var updatedContext = ctx
                     exchange.request.headers.forEach {
+                        logger.debug("Header - key {} - value {}", it.key, it.value[0])
                         if (openTracingHeaders.contains(it.key.toLowerCase())) {
                             logger.debug("Found OpenTracing Header - key {} - value {}", it.key, it.value[0])
                             updatedContext = updatedContext.put(it.key, it.value[0])
