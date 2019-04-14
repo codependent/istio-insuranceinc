@@ -1,3 +1,5 @@
+force-fail: ${FORCE_FAIL:false}
+
 opentracing:
   headers:
     - x-request-id

@@ -2,15 +2,14 @@ package com.codependent.insuranceinc.customerrating.service
 
 import com.codependent.insuranceinc.customerrating.dto.CustomerRating
 import com.codependent.insuranceinc.customerrating.dto.Rating
+import org.springframework.beans.factory.annotation.Value
 import org.springframework.stereotype.Service
-import reactor.core.publisher.Flux
 import reactor.core.publisher.Mono
-import reactor.core.publisher.toFlux
 import reactor.core.publisher.toMono
 import java.time.Duration
 
 @Service
-class CustomerRatingsServiceImpl : CustomerRatingsService {
+class CustomerRatingsServiceImpl(@Value("\${force-fail}") private val forceFail: Boolean) : CustomerRatingsService {
 
     private val customerRatings = mapOf(
             "1" to CustomerRating(Rating.PLATINUM),
@@ -19,11 +18,15 @@ class CustomerRatingsServiceImpl : CustomerRatingsService {
     )
 
     override fun getRating(userId: String) : Mono<CustomerRating> {
-        val customerRating = customerRatings[userId]
-        return if(customerRating == null) {
-            Mono.empty()
-        }else {
-            Mono.just(customerRating).delayElement(Duration.ofSeconds(5L))
+        return if(!forceFail) {
+            val customerRating = customerRatings[userId]
+            if (customerRating == null) {
+                Mono.empty()
+            } else {
+                Mono.just(customerRating).delayElement(Duration.ofSeconds(3L))
+            }
+        } else {
+            RuntimeException("Forced Failure").toMono()
         }
     }
 
