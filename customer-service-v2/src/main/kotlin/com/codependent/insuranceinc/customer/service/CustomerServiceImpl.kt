@@ -27,6 +27,7 @@ class CustomerServiceImpl(private val config: CustomerProfileConfigurationProper
 
         val customerRatingMono: Mono<CustomerRating> = webClient.get().uri("${config.customerRatingUrl}/customerRatings/$userId")
                 .retrieve().bodyToMono(CustomerRating::class.java)
+                .log()
                 .onErrorReturn(CustomerRating(null)).log()
         val customerProfileMono = customers.filter { it.id == userId }.toMono()
 
