@@ -13,6 +13,6 @@ class CustomerRatingHandler(private val customerRatingsService: CustomerRatingsS
 
     fun getPolicies(serverRequest: ServerRequest) =
             ok().body(customerRatingsService.getRating(serverRequest.pathVariable("userId"))
-                    .onErrorMap { ResponseStatusException(HttpStatus.SERVICE_UNAVAILABLE) } , CustomerRating::class.java)
+                    .onErrorMap { ResponseStatusException(HttpStatus.BAD_GATEWAY) } , CustomerRating::class.java)
 
 }
