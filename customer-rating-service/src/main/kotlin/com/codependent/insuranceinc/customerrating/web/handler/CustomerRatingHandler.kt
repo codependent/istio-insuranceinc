@@ -12,6 +12,7 @@ import org.springframework.web.server.ResponseStatusException
 class CustomerRatingHandler(private val customerRatingsService: CustomerRatingsService) {
 
     fun getPolicies(serverRequest: ServerRequest) =
-            ok().body(customerRatingsService.getRating(serverRequest.pathVariable("userId")), CustomerRating::class.java)
-                    .onErrorMap { ResponseStatusException(HttpStatus.SERVICE_UNAVAILABLE) }
+            ok().body(customerRatingsService.getRating(serverRequest.pathVariable("userId"))
+                    .onErrorMap { ResponseStatusException(HttpStatus.SERVICE_UNAVAILABLE) } , CustomerRating::class.java)
+
 }
