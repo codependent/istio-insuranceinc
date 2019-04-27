@@ -14,13 +14,13 @@ class GlobalPositionServiceImpl(private val config: GlobalPositionConfigurationP
 
     override fun getGlobalPosition(userId: String): Mono<GlobalPosition> {
 
-        val customerMono: Mono<CustomerProfile> = webClient.get().uri("${config.customerUrl}/profiles/${userId}")
+        val customerMono: Mono<CustomerProfile> = webClient.get().uri("${config.customerUrl}/profiles/$userId")
                 .retrieve().bodyToMono(CustomerProfile::class.java)
                 .onErrorReturn(CustomerProfile("-1", "", null))
-        val carPoliciesMono: Mono<List<CarPolicy>> = webClient.get().uri("${config.carUrl}/policies/${userId}")
+        val carPoliciesMono: Mono<List<CarPolicy>> = webClient.get().uri("${config.carUrl}/policies/$userId")
                 .retrieve().bodyToFlux(CarPolicy::class.java).collectList()
                 .onErrorReturn(emptyList())
-        val homePoliciesMono: Mono<List<HomePolicy>> = webClient.get().uri("${config.homeUrl}/policies/${userId}")
+        val homePoliciesMono: Mono<List<HomePolicy>> = webClient.get().uri("${config.homeUrl}/policies/$userId")
                 .retrieve().bodyToFlux(HomePolicy::class.java).collectList()
                 .onErrorReturn(emptyList())
 
