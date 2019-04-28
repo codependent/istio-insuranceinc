@@ -103,6 +103,14 @@ objects:
                   protocol: TCP
               resources: {}
               imagePullPolicy: "Always"
+              env:
+                - name: FORCE_FAIL
+                  value: 'false'
+                - name: POD_NAME
+                  valueFrom:
+                    fieldRef:
+                      apiVersion: v1
+                      fieldPath: metadata.name
               readinessProbe:
                 exec:
                   command:

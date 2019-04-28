@@ -2,14 +2,21 @@ package com.codependent.insuranceinc.customerrating.service
 
 import com.codependent.insuranceinc.customerrating.dto.CustomerRating
 import com.codependent.insuranceinc.customerrating.dto.Rating
-import org.springframework.beans.factory.annotation.Value
+import org.slf4j.LoggerFactory
 import org.springframework.stereotype.Service
 import reactor.core.publisher.Mono
 import reactor.core.publisher.toMono
 import java.time.Duration
 
 @Service
-class CustomerRatingsServiceImpl(@Value("\${force-fail}") private val forceFail: Boolean) : CustomerRatingsService {
+class CustomerRatingsServiceImpl : CustomerRatingsService {
+
+    private val forceFail: Boolean = Math.random() < 0.5
+    private val logger = LoggerFactory.getLogger(javaClass)
+
+    init {
+        logger.info("Force Fail Value $forceFail")
+    }
 
     private val customerRatings = mapOf(
             "1" to CustomerRating(Rating.PLATINUM),

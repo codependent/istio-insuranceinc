@@ -24,6 +24,11 @@ metadata:
 spec:
   host: customer-rating-service
   trafficPolicy:
+    outlierDetection:
+      baseEjectionTime: 5m
+      consecutiveErrors: 1
+      maxEjectionPercent: 100
+      minHealthPercent: 0
     tls:
       mode: ISTIO_MUTUAL
   subsets:

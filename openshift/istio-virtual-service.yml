@@ -51,4 +51,5 @@ spec:
     - route:
         - destination:
             host: customer-rating-service
+            subset: v1
           timeout: 2s
