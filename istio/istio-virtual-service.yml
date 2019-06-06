@@ -33,11 +33,11 @@ spec:
         - destination:
             host: customer-service
             subset: v1
-          weight: 20
+          weight: 50
         - destination:
             host: customer-service
             subset: v2
-          weight: 80
+          weight: 50
 ---
 apiVersion: networking.istio.io/v1alpha3
 kind: VirtualService
@@ -52,7 +52,7 @@ spec:
         - destination:
             host: customer-rating-service
             subset: v1
-          timeout: 2s
+          timeout: 5s
       retries:
         attempts: 3
         perTryTimeout: 5s

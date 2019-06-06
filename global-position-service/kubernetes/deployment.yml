@@ -1,0 +1,37 @@
+  apiVersion: apps/v1
+  kind: Deployment
+  metadata:
+    name: global-position-service
+    labels:
+      app: global-position-service
+      version: v1
+  spec:
+    replicas: 1
+    selector:
+      matchLabels:
+        app: global-position-service
+    template:
+      metadata:
+        labels:
+          app: global-position-service
+      spec:
+        containers:
+          - name: global-position-service
+            image: prfl/global-position-service:latest
+            imagePullPolicy: Never
+            ports:
+              - containerPort: 8080
+---
+apiVersion: v1
+kind: Service
+metadata:
+  name: global-position-service
+  labels:
+    app: global-position-service
+    service: global-position-service
+spec:
+  ports:
+    - port: 8080
+      name: http
+  selector:
+    app: global-position-service

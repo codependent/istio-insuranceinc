@@ -1,0 +1,37 @@
+  apiVersion: apps/v1
+  kind: Deployment
+  metadata:
+    name: home-policy-service
+    labels:
+      app: home-policy-service
+      version: v1
+  spec:
+    replicas: 1
+    selector:
+      matchLabels:
+        app: home-policy-service
+    template:
+      metadata:
+        labels:
+          app: home-policy-service
+      spec:
+        containers:
+          - name: home-policy-service
+            image: prfl/home-policy-service:latest
+            imagePullPolicy: Never
+            ports:
+              - containerPort: 8080
+---
+apiVersion: v1
+kind: Service
+metadata:
+  name: home-policy-service
+  labels:
+    app: home-policy-service
+    service: home-policy-service
+spec:
+  ports:
+    - port: 8080
+      name: http
+  selector:
+    app: home-policy-service

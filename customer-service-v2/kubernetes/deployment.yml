@@ -1,0 +1,39 @@
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: customer-service-v2
+  labels:
+    app: customer-service
+    version: v2
+spec:
+  replicas: 1
+  selector:
+    matchLabels:
+      app: customer-service
+      version: v2
+  template:
+    metadata:
+      labels:
+        app: customer-service
+        version: v2
+    spec:
+      containers:
+        - name: customer-service-v2
+          image: prfl/customer-service-v2:latest
+          imagePullPolicy: Never
+          ports:
+            - containerPort: 8080
+---
+apiVersion: v1
+kind: Service
+metadata:
+  name: customer-service
+  labels:
+    app: customer-service
+    service: customer-service
+spec:
+  ports:
+    - port: 8080
+      name: http
+  selector:
+    app: customer-service

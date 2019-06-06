@@ -1,0 +1,37 @@
+  apiVersion: apps/v1
+  kind: Deployment
+  metadata:
+    name: car-policy-service
+    labels:
+      app: car-policy-service
+      version: v1
+  spec:
+    replicas: 1
+    selector:
+      matchLabels:
+        app: car-policy-service
+    template:
+      metadata:
+        labels:
+          app: car-policy-service
+      spec:
+        containers:
+          - name: car-policy-service
+            image: prfl/car-policy-service:latest
+            imagePullPolicy: Never
+            ports:
+              - containerPort: 8080
+---
+apiVersion: v1
+kind: Service
+metadata:
+  name: car-policy-service
+  labels:
+    app: car-policy-service
+    service: car-policy-service
+spec:
+  ports:
+    - port: 8080
+      name: http
+  selector:
+    app: car-policy-service

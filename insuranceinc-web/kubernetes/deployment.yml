@@ -1,0 +1,38 @@
+  apiVersion: apps/v1
+  kind: Deployment
+  metadata:
+    name: insuranceinc-web
+    labels:
+      app: insuranceinc-web
+      version: v1
+  spec:
+    replicas: 1
+    selector:
+      matchLabels:
+        app: insuranceinc-web
+    template:
+      metadata:
+        labels:
+          app: insuranceinc-web
+      spec:
+        containers:
+          - name: insuranceinc-web
+            image: prfl/insuranceinc-web:latest
+            imagePullPolicy: Never
+            ports:
+              - containerPort: 8080
+---
+apiVersion: v1
+kind: Service
+metadata:
+  name: insuranceinc-web
+  labels:
+    app: insuranceinc-web
+    service: insuranceinc-web
+spec:
+  ports:
+    - port: 8080
+      name: http
+  selector:
+    app: insuranceinc-web
+  type: NodePort
